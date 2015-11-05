@@ -31,5 +31,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "GaProperty": {
+    "dataSource": "db",
+    "public": true
   }
 }
