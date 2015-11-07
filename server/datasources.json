@@ -17,7 +17,7 @@
             },
             "query": {
                 "ids": "ga:12345",
-                "start-date": "startDate",
+                "start-date": "{startDate}",
                 "end-date": "{endDate}",
                 "metrics": "ga:sessions,ga:bounces"
             },
