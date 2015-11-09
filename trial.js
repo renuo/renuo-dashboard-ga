@@ -1,5 +1,6 @@
-var loopback = require("loopback");
-var google = require("googleapis");
+var _ = require('underscore');
+var loopback = require('loopback');
+var google = require('googleapis');
 
 SERVICE_ACCOUNT_EMAIL = '';
 SERVICE_ACCOUNT_KEY_FILE = '';
@@ -11,18 +12,32 @@ var authClient = new google.auth.JWT(
 
 authClient.authorize(function (err, tokens) {
     console.log(err);
-    console.log(tokens);
-
     var analytics = google.analytics('v3');
-    analytics.data.ga.get({
+
+    analytics.management.profiles.list({
         auth: authClient,
-        'ids': 'ga:',
-        'start-date': '7daysAgo',
-        'end-date': 'today',
-        'metrics': 'ga:sessions'
+        accountId: '~all',
+        webPropertyId: '~all'
     }, function(err, data) {
         console.log(err);
-        console.log(data);
+        profileIds = _.pluck(data.items, 'id');
+
+        profileIds.forEach(function(profileId) {
+            analytics.data.ga.get({
+                auth: authClient,
+                'ids': 'ga:' + profileId,
+                'start-date': '7daysAgo',
+                'end-date': 'today',
+                'metrics': 'ga:sessions,ga:pageviews'
+            }, function(err, data) {
+                console.log(err);
+                var result = {
+                    profile: data.profileInfo.profileName,
+                    results: data.totalsForAllResults
+                };
+                console.log(result);
+            });
+        });
     });
 });
 
@@ -43,7 +58,7 @@ var ds = loopback.createDataSource({
                 "ids": "ga:12345",
                 "startdate": "{startDate}",
                 "enddate": "{endDate}",
-                "metrics": "ga:sessions,ga:bounces"
+                "metrics": "ga:sessions,ga:pageviews"
             },
             "responsePath": "$.totalResults"
         },
