@@ -1,20 +1,9 @@
 {
   "name": "renuo-dashboard-ga",
   "version": "1.0.0",
-  "main": "server/server.js",
-  "scripts": {
-    "pretest": "jshint ."
-  },
+  "main": "server.js",
   "dependencies": {
-    "compression": "^1.0.3",
-    "cors": "^2.5.2",
-    "googleapis": "^2.1.6",
-    "loopback": "^2.22.0",
-    "loopback-boot": "^2.6.5",
-    "loopback-component-explorer": "^2.1.0",
-    "loopback-connector-rest": "^1.10.1",
-    "loopback-datasource-juggler": "^2.39.0",
-    "serve-favicon": "^2.0.1",
+    "restify": "^4.0.3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
