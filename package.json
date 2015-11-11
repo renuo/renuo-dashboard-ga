@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "dotenv": "^1.2.0",
     "restify": "^4.0.3",
     "underscore": "^1.8.3"
   },

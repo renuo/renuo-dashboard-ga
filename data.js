@@ -1,12 +1,12 @@
+var dotenv = require('dotenv');
 var _ = require('underscore');
 var google = require('googleapis');
 
-SERVICE_ACCOUNT_EMAIL = '';
-SERVICE_ACCOUNT_KEY_FILE = '';
+dotenv.load();
 
 var authClient = new google.auth.JWT(
-    SERVICE_ACCOUNT_EMAIL,
-    SERVICE_ACCOUNT_KEY_FILE,
+    process.env.SERVICE_ACCOUNT_EMAIL,
+    process.env.SERVICE_ACCOUNT_KEY_FILE,
     null, ['https://www.googleapis.com/auth/analytics.readonly']);
 
 var analytics = google.analytics('v3');
