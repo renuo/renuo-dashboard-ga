@@ -6,8 +6,10 @@ dotenv.load();
 
 var authClient = new google.auth.JWT(
     process.env.SERVICE_ACCOUNT_EMAIL,
-    process.env.SERVICE_ACCOUNT_KEY_FILE,
-    null, ['https://www.googleapis.com/auth/analytics.readonly']);
+    null,
+    process.env.GOOGLE_SERVICE_KEY,
+    ['https://www.googleapis.com/auth/analytics.readonly']
+);
 
 var analytics = google.analytics('v3');
 var results = [];
